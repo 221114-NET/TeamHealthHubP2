@@ -14,7 +14,6 @@ namespace Repo
         {
             string AzureConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json").Build().GetSection("ConnectionStrings")["RevDatabase"]!;
 
-            //TODO MAKE a new user
             String sql = $"INSERT INTO [dbo].[UserHealthClass]([UserEmail],[UserFirstName],[UserLastName], [UserPassword], [UserRole]) VALUES(@email, @userFname, @userLname, @password, 'user')";
             try
             {
