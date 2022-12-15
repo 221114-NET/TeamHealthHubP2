@@ -9,6 +9,8 @@
 *.user
 *.userosscache
 *.sln.docstates
+#this file will not be checked in
+appsettings.Development.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
