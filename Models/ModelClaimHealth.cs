@@ -7,7 +7,7 @@ namespace Models
 {
     public class ModelClaimHealth
     {
-        public ModelClaimHealth(string claimId, string userId, string claimAmount,string claimType, string claimApproved, string claimPendingStatus)
+        public ModelClaimHealth(int claimId, int userId, double claimAmount,string claimType, bool claimApproved, bool claimPendingStatus)
         {
             ClaimId = claimId;
             UserId = userId;
@@ -17,11 +17,11 @@ namespace Models
             ClaimPendingStatus = claimPendingStatus;
         }
 
-        public string ClaimId { get; set; }
-        public string UserId { get; set; }
+        public int ClaimId { get; set; }
+        public int UserId { get; set; }
         public string ClaimType { get; set; }
-        public string ClaimAmount { get; set; }
-        public string ClaimApproved { get; set; }
-        public string ClaimPendingStatus { get; set; }
+        public double ClaimAmount { get; set; }
+        public bool ClaimApproved { get; set; }
+        public bool ClaimPendingStatus { get; set; }
     }
 }
