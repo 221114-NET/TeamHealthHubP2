@@ -19,9 +19,9 @@ namespace Api.Controllers
         }
         
         [HttpPost("NewUser/Signup")]
-        public string NewUser(string email, string firstname, string lastname, string password)
+        public string NewUser(NewUserDTO newUserDTO)
         {
-            return _iBusinessClassNewUser.NewUser(email, firstname, lastname, password);
+            return _iBusinessClassNewUser.NewUser(newUserDTO);
         }
     }
 }
