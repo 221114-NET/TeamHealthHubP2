@@ -64,8 +64,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.AddAuthorization();
 
 #endregion
-        builder.Services.AddScoped<IBusinessClassNewUser, BusinessClassNewUser>();
-        builder.Services.AddScoped<IRepoClassNewUser, RepoClassNewUser>();
+        builder.Services.AddScoped<IBusinessNewUser, BusinessNewUser>();
+        builder.Services.AddScoped<IRepoNewUser, RepoNewUser>();
 
         var app = builder.Build();
 

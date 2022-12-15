@@ -6,8 +6,8 @@ using Models;
 
 namespace Repo
 {
-    public interface IRepoClassNewUser
+    public interface IRepoNewUser
     {
-        string NewUser(NewUserDTO newUserDTO);
+        string NewUser(DtoNewUser dtoNewUser);
     }
 }

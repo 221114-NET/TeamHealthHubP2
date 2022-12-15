@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class NewUserDTO
+    public class DtoNewUser
     {
-        public NewUserDTO(string email, string firstname, string lastname, string password)
+        public DtoNewUser(string email, string firstname, string lastname, string password)
         {
             Email = email;
             FirstName = firstname;

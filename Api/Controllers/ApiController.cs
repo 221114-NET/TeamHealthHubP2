@@ -11,17 +11,25 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     public class ApiController : ControllerBase
     {
-        private readonly IBusinessClassNewUser _iBusinessClassNewUser;
+        private readonly IBusinessNewUser _iBusinessNewUser;
+        private readonly IBusinessFileClaim _iBusinessFileClaim;
 
-        public ApiController(IBusinessClassNewUser iBusinessClassNewUser)
+        public ApiController(IBusinessNewUser iBusinessNewUser, IBusinessFileClaim iBusinessFileClaim)
         {
-            _iBusinessClassNewUser = iBusinessClassNewUser;
+            _iBusinessNewUser = iBusinessNewUser;
+            _iBusinessFileClaim = iBusinessFileClaim;
         }
-        
+
         [HttpPost("NewUser/Signup")]
-        public string NewUser(NewUserDTO newUserDTO)
+        public string NewUser(DtoNewUser dtoNewUser)
         {
-            return _iBusinessClassNewUser.NewUser(newUserDTO);
+            return _iBusinessNewUser.NewUser(dtoNewUser);
+        }
+
+        [HttpPost("User/FileClaim")]
+        public string FileClaim(ModelClaimHealth modelClaimHealth)
+        {
+            return _iBusinessFileClaim.FileClaim(modelClaimHealth);
         }
     }
 }

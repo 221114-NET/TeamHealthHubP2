@@ -8,9 +8,9 @@ using Models;
 
 namespace Repo
 {
-    public class RepoClassNewUser : IRepoClassNewUser
+    public class RepoNewUser : IRepoNewUser
     {
-        public string NewUser(NewUserDTO newUserDTO)
+        public string NewUser(DtoNewUser dtoNewUser)
         {
             string AzureConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json").Build().GetSection("ConnectionStrings")["RevDatabase"]!;
 
@@ -22,10 +22,10 @@ namespace Repo
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@email", newUserDTO.Email);
-                        command.Parameters.AddWithValue("@userFname", newUserDTO.FirstName);
-                        command.Parameters.AddWithValue("@userLname", newUserDTO.LastName);
-                        command.Parameters.AddWithValue("@password", newUserDTO.Password);
+                        command.Parameters.AddWithValue("@email", dtoNewUser.Email);
+                        command.Parameters.AddWithValue("@userFname", dtoNewUser.FirstName);
+                        command.Parameters.AddWithValue("@userLname", dtoNewUser.LastName);
+                        command.Parameters.AddWithValue("@password", dtoNewUser.Password);
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
