@@ -33,9 +33,10 @@ namespace Api.Controllers
         public string FileClaim(DtoNewFileClaim dtoNewFileClaim)
         {
             ModelClaimHealth modelClaimHealth = new ModelClaimHealth();
-            string userEmail = ($"{this.User.FindFirst(ClaimTypes.NameIdentifier).Value}");
-            modelClaimHealth.ClaimType = dtoNewFileClaim.ClaimType;
-            modelClaimHealth.ClaimAmount = dtoNewFileClaim.ClaimAmount;
+            string userEmail = ($"{this.User.FindFirst(ClaimTypes.Email).Value}");
+            modelClaimHealth.ClaimType = dtoNewFileClaim.claimtype;
+            modelClaimHealth.ClaimAmount = dtoNewFileClaim.claimamount;
+            modelClaimHealth.ClaimDescription = dtoNewFileClaim.claimdescription;
             return _iBusinessFileClaim.FileClaim(userEmail, modelClaimHealth);
         }
 

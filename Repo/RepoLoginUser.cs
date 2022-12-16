@@ -15,7 +15,7 @@ namespace Repo
             string AzureConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json").Build().GetSection("ConnectionStrings")["RevDatabase"]!;
 
             //Login a user
-            string sql = $"Select UserID, UserFirstName, UserLastName, UserRole From [dbo].[UserDataClass] Where UserEmail = @UserEmail AND UserPassword = @UserPassword";
+            string sql = $"Select UserRole From [dbo].[UserHealthClass] Where UserEmail = @UserEmail AND UserPassword = @UserPassword";
 
             try
             {
@@ -28,7 +28,11 @@ namespace Repo
                         command.Parameters.AddWithValue("@UserPassword", dtoLogin.password);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            return "Login Successful";
+                            while (reader.Read())
+                            {
+                                return reader.GetString(0);
+                            }
+                            return "false";
                         }
                     }
                 }
@@ -36,7 +40,7 @@ namespace Repo
             catch (SqlException e)
             {
                 Console.WriteLine(e.ToString());
-                return "Invalid Email/Password combination";
+                return "false";
             }
         }
     }

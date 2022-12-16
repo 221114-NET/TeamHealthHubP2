@@ -22,10 +22,10 @@ namespace Repo
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@email", dtoNewUser.Email);
-                        command.Parameters.AddWithValue("@userFname", dtoNewUser.FirstName);
-                        command.Parameters.AddWithValue("@userLname", dtoNewUser.LastName);
-                        command.Parameters.AddWithValue("@password", dtoNewUser.Password);
+                        command.Parameters.AddWithValue("@email", dtoNewUser.email);
+                        command.Parameters.AddWithValue("@userFname", dtoNewUser.firstname);
+                        command.Parameters.AddWithValue("@userLname", dtoNewUser.lastname);
+                        command.Parameters.AddWithValue("@password", dtoNewUser.password);
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {

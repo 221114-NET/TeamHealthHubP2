@@ -14,7 +14,7 @@ namespace Repo
         {
             string AzureConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json").Build().GetSection("ConnectionStrings")["RevDatabase"]!;
 
-            string sql = $"INSERT INTO [dbo].[ClaimHealthClass]([UserID], [ClaimType], [ClaimDescription],[ClaimAmount],[ClaimApproved],[ClaimPendingStatus]) VALUES((SELECT UserID From [dbo].[UserHealthClass] WHERE UserEmail = @LogedInUserEmail), @ticketType, @reimbursementAmount, @ReimbursementDescription 0, 1)";
+            string sql = "INSERT INTO [dbo].[ClaimHealthClass]([UserID], [ClaimType], [ClaimDescription],[ClaimAmount],[ClaimApproved],[ClaimPendingStatus]) VALUES((SELECT UserID From [dbo].[UserHealthClass] WHERE UserEmail = @LoggedInUserEmail), @ticketType, @ReimbursementDescription, @reimbursementAmount, 0, 1)";
             try
             {
                 using (SqlConnection connection = new SqlConnection(AzureConnectionString))
@@ -24,7 +24,7 @@ namespace Repo
                     {
                         command.Parameters.AddWithValue("@ticketType", modelClaimHealth.ClaimType);
                         command.Parameters.AddWithValue("@reimbursementAmount", modelClaimHealth.ClaimAmount);
-                        command.Parameters.AddWithValue("@LogedInUserName", userEmail);
+                        command.Parameters.AddWithValue("@LoggedInUserEmail", userEmail);
                         command.Parameters.AddWithValue("@ReimbursementDescription", modelClaimHealth.ClaimDescription);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
