@@ -4,6 +4,7 @@ namespace Business
 {
     public interface IBusinessNewUser
     {
-    string NewUser(DtoNewUser dtoNewUser);
+        string NewUser(DtoNewUser dtoNewUser);
+
     }
 }

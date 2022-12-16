@@ -13,11 +13,13 @@ namespace Api.Controllers
     {
         private readonly IBusinessNewUser _iBusinessNewUser;
         private readonly IBusinessFileClaim _iBusinessFileClaim;
+        private readonly IBusinessLoginUser _iBusinessLoginUser;
 
-        public ApiController(IBusinessNewUser iBusinessNewUser, IBusinessFileClaim iBusinessFileClaim)
+        public ApiController(IBusinessNewUser iBusinessNewUser, IBusinessFileClaim iBusinessFileClaim, IBusinessLoginUser iBusinessLoginUser)
         {
             _iBusinessNewUser = iBusinessNewUser;
             _iBusinessFileClaim = iBusinessFileClaim;
+            _iBusinessLoginUser = iBusinessLoginUser;
         }
 
         [HttpPost("NewUser/Signup")]
@@ -35,6 +37,12 @@ namespace Api.Controllers
             modelClaimHealth.ClaimType = dtoNewFileClaim.ClaimType;
             modelClaimHealth.ClaimAmount = dtoNewFileClaim.ClaimAmount;
             return _iBusinessFileClaim.FileClaim(userEmail, modelClaimHealth);
+        }
+
+        [HttpGet("User/Login")]
+        public string LoginUser(string email, string password)
+        {
+            return _iBusinessLoginUser.LoginUser(email,password);
         }
     }
 }
