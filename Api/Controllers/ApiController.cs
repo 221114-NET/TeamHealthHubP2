@@ -39,7 +39,7 @@ namespace Api.Controllers
             return _iBusinessFileClaim.FileClaim(userEmail, modelClaimHealth);
         }
 
-        [HttpGet("User/Login")]
+        [HttpPost("User/Login")]
         public string LoginUser(DtoLogin dtoLogin)
         {
             return _iBusinessLoginUser.LoginUser(dtoLogin);
