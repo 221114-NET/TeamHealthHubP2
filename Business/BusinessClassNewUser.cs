@@ -18,5 +18,10 @@ namespace Business
         {
             return _IRepoClassNewUser.NewUser(email, firstname, lastname, password);
         }
+
+        public string LoginUser(string email, string password)
+        {
+            return _IRepoClassNewUser.LoginUser(email,password);
+        }
     }
 }

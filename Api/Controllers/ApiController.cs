@@ -23,5 +23,11 @@ namespace Api.Controllers
         {
             return _iBusinessClassNewUser.NewUser(email, firstname, lastname, password);
         }
+
+        [HttpGet("User/Login")]
+        public string LoginUser(string email, string password)
+        {
+            return _iBusinessClassNewUser.LoginUser(email,password);
+        }
     }
 }
