@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Repo
 {
-    public interface IRepoClassNewUser
+    public interface IRepoLoginUser
     {
-        string NewUser(string email, string firstname,string lastname, string password);
         string LoginUser(string email, string password);
     }
 }
