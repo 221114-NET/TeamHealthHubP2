@@ -66,6 +66,8 @@ builder.Services.AddAuthorization();
 #endregion
         builder.Services.AddScoped<IBusinessNewUser, BusinessNewUser>();
         builder.Services.AddScoped<IRepoNewUser, RepoNewUser>();
+        builder.Services.AddScoped<IBusinessLoginUser, BusinessLoginUser>();
+        builder.Services.AddScoped<IRepoLoginUser, RepoLoginUser>();
 
         var app = builder.Build();
 
