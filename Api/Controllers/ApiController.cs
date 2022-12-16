@@ -40,9 +40,9 @@ namespace Api.Controllers
         }
 
         [HttpGet("User/Login")]
-        public string LoginUser(string email, string password)
+        public string LoginUser(DtoLogin dtoLogin)
         {
-            return _iBusinessLoginUser.LoginUser(email,password);
+            return _iBusinessLoginUser.LoginUser(dtoLogin);
         }
     }
 }
