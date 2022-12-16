@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Models;
 using Repo;
 
 namespace Business
@@ -15,9 +16,9 @@ namespace Business
             _IRepoLoginUser = irepoLoginUser;
         }
 
-        public string LoginUser(string email, string password)
+        public string LoginUser(DtoLogin dtoLogin)
         {
-            return _IRepoLoginUser.LoginUser(email, password);
+            return _IRepoLoginUser.LoginUser(dtoLogin);
         }
     }
 }

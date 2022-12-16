@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Models;
 
 namespace Repo
 {
     public class RepoLoginUser : IRepoLoginUser
     {
-        public string LoginUser(string email, string password)
+        public string LoginUser(DtoLogin dtoLogin)
         {
             string AzureConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json").Build().GetSection("ConnectionStrings")["RevDatabase"]!;
 
@@ -23,8 +24,8 @@ namespace Repo
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@UserEmail", email);
-                        command.Parameters.AddWithValue("@UserPassword", password);
+                        command.Parameters.AddWithValue("@UserEmail", dtoLogin.email);
+                        command.Parameters.AddWithValue("@UserPassword", dtoLogin.password);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             return "Login Successful";
