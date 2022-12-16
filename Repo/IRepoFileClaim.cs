@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Models;
 
-namespace Business
+namespace Repo
 {
-    public interface IBusinessFileClaim
+    public interface IRepoFileClaim
     {
         string FileClaim(string userEmail, ModelClaimHealth modelClaimHealth);
     }

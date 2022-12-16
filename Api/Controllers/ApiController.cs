@@ -3,7 +3,7 @@ using Models;
 using Business;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-//using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Api.Controllers
 {
@@ -25,11 +25,16 @@ namespace Api.Controllers
         {
             return _iBusinessNewUser.NewUser(dtoNewUser);
         }
-
+        
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "user, admin")]
         [HttpPost("User/FileClaim")]
-        public string FileClaim(ModelClaimHealth modelClaimHealth)
+        public string FileClaim(DtoNewFileClaim dtoNewFileClaim)
         {
-            return _iBusinessFileClaim.FileClaim(modelClaimHealth);
+            ModelClaimHealth modelClaimHealth = new ModelClaimHealth();
+            string userEmail = ($"{this.User.FindFirst(ClaimTypes.NameIdentifier).Value}");
+            modelClaimHealth.ClaimType = dtoNewFileClaim.ClaimType;
+            modelClaimHealth.ClaimAmount = dtoNewFileClaim.ClaimAmount;
+            return _iBusinessFileClaim.FileClaim(userEmail, modelClaimHealth);
         }
     }
 }
