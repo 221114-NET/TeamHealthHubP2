@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Models;
 
 namespace Repo
 {
-    public interface IRepoClassNewUser
+    public interface IRepoNewUser
     {
-        string NewUser(string email, string firstname,string lastname, string password);
+        string NewUser(DtoNewUser dtoNewUser);
     }
 }

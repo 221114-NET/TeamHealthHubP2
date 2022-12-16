@@ -3,7 +3,7 @@ using Models;
 using Business;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-//using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Api.Controllers
 {
@@ -11,17 +11,30 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     public class ApiController : ControllerBase
     {
-        private readonly IBusinessClassNewUser _iBusinessClassNewUser;
+        private readonly IBusinessNewUser _iBusinessNewUser;
+        private readonly IBusinessFileClaim _iBusinessFileClaim;
 
-        public ApiController(IBusinessClassNewUser iBusinessClassNewUser)
+        public ApiController(IBusinessNewUser iBusinessNewUser, IBusinessFileClaim iBusinessFileClaim)
         {
-            _iBusinessClassNewUser = iBusinessClassNewUser;
+            _iBusinessNewUser = iBusinessNewUser;
+            _iBusinessFileClaim = iBusinessFileClaim;
+        }
+
+        [HttpPost("NewUser/Signup")]
+        public string NewUser(DtoNewUser dtoNewUser)
+        {
+            return _iBusinessNewUser.NewUser(dtoNewUser);
         }
         
-        [HttpPost("NewUser/Signup")]
-        public string NewUser(string email, string firstname, string lastname, string password)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "user, admin")]
+        [HttpPost("User/FileClaim")]
+        public string FileClaim(DtoNewFileClaim dtoNewFileClaim)
         {
-            return _iBusinessClassNewUser.NewUser(email, firstname, lastname, password);
+            ModelClaimHealth modelClaimHealth = new ModelClaimHealth();
+            string userEmail = ($"{this.User.FindFirst(ClaimTypes.NameIdentifier).Value}");
+            modelClaimHealth.ClaimType = dtoNewFileClaim.ClaimType;
+            modelClaimHealth.ClaimAmount = dtoNewFileClaim.ClaimAmount;
+            return _iBusinessFileClaim.FileClaim(userEmail, modelClaimHealth);
         }
     }
 }
