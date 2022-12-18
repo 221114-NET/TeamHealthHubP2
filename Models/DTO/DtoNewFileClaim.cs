@@ -7,13 +7,15 @@ namespace Models
 {
     public class DtoNewFileClaim
     {
-         public DtoNewFileClaim(string claimType, double claimAmount)
+         public DtoNewFileClaim(string claimType,string claimDescription, double claimAmount)
         {
-            ClaimType = claimType;
-            ClaimAmount = claimAmount;
+            this.claimtype = claimType;
+            this.claimdescription = claimDescription;
+            this.claimamount = claimAmount;
         }
 
-        public string ClaimType { get; set; }
-        public double ClaimAmount { get; set; }
+        public string? claimtype { get; set; }
+        public string? claimdescription { get; set; }
+        public double claimamount { get; set; }
     }
 }
