@@ -16,7 +16,7 @@ namespace Repo
 
             string AzureConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json").Build().GetSection("ConnectionStrings")["RevDatabase"]!;
 
-            string sql = $"Select * From [dbo].[ClaimHealthClass] Where ClaimPendingStatus= 0";
+            string sql = $"Select * From [dbo].[ClaimHealthClass] Where ClaimPendingStatus= 1";
 
             try
             {
