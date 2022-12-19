@@ -53,9 +53,9 @@ namespace Api.Controllers
         // if you are not authenticated then the response will be a 401 because you don't have access to it
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("User/GetClaim")]
-        public List<ModelClaimHealth> GetUserClaims(string userEmail)
+        public List<ModelClaimHealth> GetUserClaims()
         {
-            userEmail = ($"{this.User.FindFirst(ClaimTypes.Email)!.Value}"); // this is important, it deserializes this string 
+            string userEmail = ($"{this.User.FindFirst(ClaimTypes.Email)!.Value}"); // this is important, it deserializes this string
             return _iBusinessGetUserClaim.GetUserClaims(userEmail);
         }
     }
