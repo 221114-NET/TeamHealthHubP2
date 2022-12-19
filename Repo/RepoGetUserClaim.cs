@@ -10,7 +10,7 @@ namespace Repo
 {
     public class RepoGetUserClaim : IRepoGetUserClaim
     {
-        public List<ModelClaimHealth> GetUserClaims(ModelClaimHealth modelClaimHealth)
+        public List<ModelClaimHealth> GetUserClaims(int userId)
         {
             List<ModelClaimHealth> userClaims = new List<ModelClaimHealth>();
 
@@ -25,19 +25,21 @@ namespace Repo
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@UserID", modelClaimHealth.UserId);
+                        command.Parameters.AddWithValue("@UserID", userId);
 
                         using (SqlDataReader resultSet = command.ExecuteReader())
                         {
                             while (resultSet.Read())
                             {
-                                modelClaimHealth.ClaimId = resultSet.GetInt32(0);
-                                modelClaimHealth.ClaimType = resultSet.GetString(2);
-                                modelClaimHealth.ClaimDescription = resultSet.GetString(3);
-                                modelClaimHealth.ClaimAmount = resultSet.GetDouble(4);
-                                modelClaimHealth.ClaimApproved = resultSet.GetBoolean(5);
-                                modelClaimHealth.ClaimPendingStatus = resultSet.GetBoolean(6);
-                                userClaims.Add(modelClaimHealth);
+                                ModelClaimHealth claim = new ModelClaimHealth();
+                                claim.ClaimId = resultSet.GetInt32(0);
+                                claim.UserId = userId;
+                                claim.ClaimType = resultSet.GetString(2);
+                                claim.ClaimDescription = resultSet.GetString(3);
+                                claim.ClaimAmount = resultSet.GetDouble(4);
+                                claim.ClaimApproved = resultSet.GetBoolean(5);
+                                claim.ClaimPendingStatus = resultSet.GetBoolean(6);
+                                userClaims.Add(claim);
                             }
                             return userClaims;
                         }
