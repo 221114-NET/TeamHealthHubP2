@@ -67,10 +67,12 @@ builder.Services.AddAuthorization();
         builder.Services.AddScoped<IBusinessNewUser, BusinessNewUser>();
         builder.Services.AddScoped<IBusinessLoginUser, BusinessLoginUser>();
         builder.Services.AddScoped<IBusinessFileClaim, BusinessFileClaim>();
+        builder.Services.AddScoped<IBusinessGetUserClaim, BusinessGetUserClaim>();
 
         builder.Services.AddScoped<IRepoNewUser, RepoNewUser>();
         builder.Services.AddScoped<IRepoLoginUser, RepoLoginUser>();
         builder.Services.AddScoped<IRepoFileClaim, RepoFileClaim>();
+        builder.Services.AddScoped<IRepoGetUserClaim, RepoGetUserClaim>();
 
         var app = builder.Build();
 

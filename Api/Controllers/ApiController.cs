@@ -14,12 +14,15 @@ namespace Api.Controllers
         private readonly IBusinessNewUser _iBusinessNewUser;
         private readonly IBusinessFileClaim _iBusinessFileClaim;
         private readonly IBusinessLoginUser _iBusinessLoginUser;
+        private readonly IBusinessGetUserClaim _iBusinessGetUserClaim;
 
-        public ApiController(IBusinessNewUser iBusinessNewUser, IBusinessFileClaim iBusinessFileClaim, IBusinessLoginUser iBusinessLoginUser)
+        public ApiController(IBusinessNewUser iBusinessNewUser, IBusinessFileClaim iBusinessFileClaim, IBusinessLoginUser iBusinessLoginUser,
+            IBusinessGetUserClaim iBusinessGetUserClaim)
         {
             _iBusinessNewUser = iBusinessNewUser;
             _iBusinessFileClaim = iBusinessFileClaim;
             _iBusinessLoginUser = iBusinessLoginUser;
+            _iBusinessGetUserClaim = iBusinessGetUserClaim;
         }
 
         [HttpPost("NewUser/Signup")]
@@ -44,6 +47,14 @@ namespace Api.Controllers
         public string LoginUser(DtoLogin dtoLogin)
         {
             return _iBusinessLoginUser.LoginUser(dtoLogin);
+        }
+
+        [HttpGet("User/GetClaim")]
+        public List<ModelClaimHealth> GetUserClaim(DtoGetUserClaims dtoGetUserClaims)
+        {
+            ModelClaimHealth modelClaimHealth = new ModelClaimHealth();
+            modelClaimHealth.UserId = dtoGetUserClaims.UserId;
+            return _iBusinessGetUserClaim.GetUserClaim(modelClaimHealth);
         }
     }
 }
