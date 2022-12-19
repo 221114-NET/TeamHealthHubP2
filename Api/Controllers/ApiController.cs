@@ -30,13 +30,13 @@ namespace Api.Controllers
         {
             return _iBusinessNewUser.NewUser(dtoNewUser);
         }
-        
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "user, admin")]
         [HttpPost("User/FileClaim")]
         public string FileClaim(DtoNewFileClaim dtoNewFileClaim)
         {
             ModelClaimHealth modelClaimHealth = new ModelClaimHealth();
-            string userEmail = ($"{this.User.FindFirst(ClaimTypes.Email).Value}");
+            string userEmail = ($"{this.User.FindFirst(ClaimTypes.Email)!.Value}");
             modelClaimHealth.ClaimType = dtoNewFileClaim.claimtype;
             modelClaimHealth.ClaimAmount = dtoNewFileClaim.claimamount;
             modelClaimHealth.ClaimDescription = dtoNewFileClaim.claimdescription;
@@ -52,11 +52,11 @@ namespace Api.Controllers
         // client must have a role to use this http request
         // if you are not authenticated then the response will be a 401 because you don't have access to it
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPost("User/GetClaim")]
-        public List<ModelClaimHealth> GetUserClaims(DtoGetUserClaims dtoGetUserClaims)
+        [HttpGet("User/GetClaim")]
+        public List<ModelClaimHealth> GetUserClaims(string userEmail)
         {
-            int userId = dtoGetUserClaims.UserId;
-            return _iBusinessGetUserClaim.GetUserClaims(userId);
+            userEmail = ($"{this.User.FindFirst(ClaimTypes.Email)!.Value}");
+            return _iBusinessGetUserClaim.GetUserClaims(userEmail);
         }
     }
 }
