@@ -7,10 +7,10 @@ namespace Models
 {
     public class DtoGetUserClaims
     {
-        public int UserId {get; set;}
-        public DtoGetUserClaims(int userId)
+        public string UserEmail {get; set; }
+        public DtoGetUserClaims(string userEmail)
         {
-            UserId = userId;
+            UserEmail = userEmail;
         }
     }
 }

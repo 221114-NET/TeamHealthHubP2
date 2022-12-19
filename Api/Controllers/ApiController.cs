@@ -51,13 +51,12 @@ namespace Api.Controllers
 
         // client must have a role to use this http request
         // if you are not authenticated then the response will be a 401 because you don't have access to it
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "user, admin")]
-        [HttpPost("User/GetClaim")]
-        public List<ModelClaimHealth> GetUserClaims(DtoGetUserClaims dtoGetUserClaims)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("User/GetClaim")]
+        public List<ModelClaimHealth> GetUserClaims()
         {
-            ModelClaimHealth modelClaimHealth = new ModelClaimHealth();
-            modelClaimHealth.UserId = dtoGetUserClaims.UserId;
-            return _iBusinessGetUserClaim.GetUserClaims(modelClaimHealth);
+            string userEmail = ($"{this.User.FindFirst(ClaimTypes.Email)!.Value}"); // this is important, it deserializes this string
+            return _iBusinessGetUserClaim.GetUserClaims(userEmail);
         }
     }
 }
