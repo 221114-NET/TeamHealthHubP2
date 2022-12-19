@@ -31,15 +31,7 @@ namespace Repo
                         {
                             while (resultSet.Read())
                             {
-                                ModelClaimHealth claim = new ModelClaimHealth();
-                                claim.ClaimId = resultSet.GetInt32(0);
-                                claim.UserId = resultSet.GetInt32(1);
-                                claim.ClaimType = resultSet.GetString(2);
-                                claim.ClaimDescription = resultSet.GetString(3);
-                                claim.ClaimAmount = resultSet.GetDouble(4);
-                                claim.ClaimApproved = resultSet.GetBoolean(5);
-                                claim.ClaimPendingStatus = resultSet.GetBoolean(6);
-                                userClaims.Add(claim);
+                                userClaims.Add(new ModelClaimHealth(resultSet.GetInt32(0),resultSet.GetInt32(1),resultSet.GetString(2),resultSet.GetString(3),resultSet.GetDouble(4),resultSet.GetBoolean(5),resultSet.GetBoolean(6)));
                             }
                             return userClaims;
                         }
