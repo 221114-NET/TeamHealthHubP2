@@ -55,7 +55,7 @@ namespace Api.Controllers
         [HttpGet("User/GetClaim")]
         public List<ModelClaimHealth> GetUserClaims(string userEmail)
         {
-            userEmail = ($"{this.User.FindFirst(ClaimTypes.Email)!.Value}");
+            userEmail = ($"{this.User.FindFirst(ClaimTypes.Email)!.Value}"); // this is important, it deserializes this string 
             return _iBusinessGetUserClaim.GetUserClaims(userEmail);
         }
     }
