@@ -10,13 +10,13 @@ namespace Repo
 {
     public class RepoGetUserClaim : IRepoGetUserClaim
     {
-        public List<ModelClaimHealth> GetUserClaims(int userId)
+        public List<ModelClaimHealth> GetUserClaims(string userEmail)
         {
             List<ModelClaimHealth> userClaims = new List<ModelClaimHealth>();
 
             string AzureConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json").Build().GetSection("ConnectionStrings")["RevDatabase"]!;
 
-            string sql = $"Select * From [dbo].[ClaimHealthClass] Where UserID = @UserID";
+            string sql = $"Select ClaimID, ClaimHealthClass.UserID, ClaimType, ClaimDescription, ClaimAmount, ClaimApproved, ClaimPendingStatus From ClaimHealthClass Left Join UserHealthClass On UserHealthClass.UserID = ClaimHealthClass.UserID Where UserHealthClass.UserEmail = @UserEmail";
 
             try
             {
@@ -25,7 +25,7 @@ namespace Repo
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@UserID", userId);
+                        command.Parameters.AddWithValue("@UserEmail", userEmail);
 
                         using (SqlDataReader resultSet = command.ExecuteReader())
                         {
@@ -33,7 +33,7 @@ namespace Repo
                             {
                                 ModelClaimHealth claim = new ModelClaimHealth();
                                 claim.ClaimId = resultSet.GetInt32(0);
-                                claim.UserId = userId;
+                                claim.UserId = resultSet.GetInt32(1);
                                 claim.ClaimType = resultSet.GetString(2);
                                 claim.ClaimDescription = resultSet.GetString(3);
                                 claim.ClaimAmount = resultSet.GetDouble(4);
