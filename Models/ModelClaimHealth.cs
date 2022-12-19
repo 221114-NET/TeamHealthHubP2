@@ -7,7 +7,7 @@ namespace Models
 {
     public class ModelClaimHealth
     {
-        public ModelClaimHealth(int claimId, int userId, double claimAmount, string claimType,string claimDescription, bool claimApproved, bool claimPendingStatus)
+        public ModelClaimHealth(int claimId, int userId, string claimType,string claimDescription, double claimAmount, bool claimApproved, bool claimPendingStatus)
         {
             ClaimId = claimId;
             UserId = userId;

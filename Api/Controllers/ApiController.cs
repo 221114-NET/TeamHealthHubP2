@@ -16,13 +16,16 @@ namespace Api.Controllers
         private readonly IBusinessLoginUser _iBusinessLoginUser;
         private readonly IBusinessGetUserClaim _iBusinessGetUserClaim;
 
+        private readonly IBusinessAdminPendingClaims _iBusinessAdminPendingClaims;
+
         public ApiController(IBusinessNewUser iBusinessNewUser, IBusinessFileClaim iBusinessFileClaim, IBusinessLoginUser iBusinessLoginUser,
-            IBusinessGetUserClaim iBusinessGetUserClaim)
+            IBusinessGetUserClaim iBusinessGetUserClaim, IBusinessAdminPendingClaims iBusinessAdminPendingClaims)
         {
             _iBusinessNewUser = iBusinessNewUser;
             _iBusinessFileClaim = iBusinessFileClaim;
             _iBusinessLoginUser = iBusinessLoginUser;
             _iBusinessGetUserClaim = iBusinessGetUserClaim;
+            _iBusinessAdminPendingClaims = iBusinessAdminPendingClaims;
         }
 
         [HttpPost("NewUser/Signup")]
@@ -59,5 +62,17 @@ namespace Api.Controllers
             modelClaimHealth.UserId = dtoGetUserClaims.UserId;
             return _iBusinessGetUserClaim.GetUserClaims(modelClaimHealth);
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("Admin/PendingClaims")]
+        public List<ModelClaimHealth> AdminPendingClaims()
+        {
+            return _iBusinessAdminPendingClaims.AdminPendingClaims();
+
+        }
+
+
+
+
     }
 }
