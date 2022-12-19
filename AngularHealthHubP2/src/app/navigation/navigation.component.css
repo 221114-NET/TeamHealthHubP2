@@ -1,0 +1,23 @@
+nav{
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+    list-style-type: none;
+}
+nav img{
+    margin-left: 10px;
+}
+nav li a{
+    color: white;
+    text-decoration: none;
+    padding: 0 10px;
+}
+span{
+    margin-left: 10px;
+}
