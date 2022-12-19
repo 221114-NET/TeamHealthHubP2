@@ -10,7 +10,7 @@ namespace Repo
 {
     public class RepoGetUserClaim : IRepoGetUserClaim
     {
-        public List<ModelClaimHealth> GetUserClaim(ModelClaimHealth modelClaimHealth)
+        public List<ModelClaimHealth> GetUserClaims(ModelClaimHealth modelClaimHealth)
         {
             List<ModelClaimHealth> userClaims = new List<ModelClaimHealth>();
 
@@ -26,6 +26,7 @@ namespace Repo
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@UserID", modelClaimHealth.UserId);
+
                         using (SqlDataReader resultSet = command.ExecuteReader())
                         {
                             while (resultSet.Read())

@@ -8,6 +8,6 @@ namespace Business
 {
     public interface IBusinessGetUserClaim
     {
-        public List<ModelClaimHealth> GetUserClaim(ModelClaimHealth modelClaimHealth);
+        public List<ModelClaimHealth> GetUserClaims(ModelClaimHealth modelClaimHealth);
     }
 }

@@ -11,8 +11,8 @@ public class BusinessGetUserClaim : IBusinessGetUserClaim
     {
         this.iRepoGetUserClaim = iRepoGetUserClaim;
     }
-    public List<ModelClaimHealth> GetUserClaim(ModelClaimHealth modelClaimHealth)
+    public List<ModelClaimHealth> GetUserClaims(ModelClaimHealth modelClaimHealth)
     {
-        return iRepoGetUserClaim.GetUserClaim(modelClaimHealth);
+        return iRepoGetUserClaim.GetUserClaims(modelClaimHealth);
     }
 }

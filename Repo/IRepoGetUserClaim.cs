@@ -3,6 +3,6 @@ namespace Repo
 {
     public interface IRepoGetUserClaim
     {
-        public List<ModelClaimHealth> GetUserClaim(ModelClaimHealth modelClaimHealth);
+        public List<ModelClaimHealth> GetUserClaims(ModelClaimHealth modelClaimHealth);
     }
 }
