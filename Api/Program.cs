@@ -62,6 +62,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 builder.Services.AddAuthorization();
+string myAllowAllOrigins = "_myAllowAllOrigins";
+//TODO add cors this is bad practice but for now it will work
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(myAllowAllOrigins, builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 
 #endregion
         builder.Services.AddScoped<IBusinessNewUser, BusinessNewUser>();
@@ -90,6 +101,8 @@ builder.Services.AddAuthorization();
 
         app.UseAuthorization();
 
+        //TODO add cors this is bad practice but for now it will work
+        app.UseCors(myAllowAllOrigins);
 
         app.MapControllers();
 

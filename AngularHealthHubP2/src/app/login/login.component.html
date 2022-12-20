@@ -2,20 +2,21 @@
     <div>
         <!-- make a loginForm -->
 
-        <form action="loginForm" method="post">
+        <!-- <form action="loginForm" method="post"> -->
+            <!-- <p>{{loginEmail}}</p> --> <!-- this is how to bind data to display -->
         <table>
             <tr>
                 <td>Email:</td>
-                <td><input type="text" name="email" id="email"></td>
+                <td><input [(ngModel)]="loginEmail" id="email"></td>
             </tr>
             <tr>
                 <td>Password:</td>
                 <td><input type="password" name="password" id="password"></td>
             </tr>
             <tr>
-                <td><button>Login</button></td>
+                <td><button (click) = "LoginButton()">Login</button></td>
             </tr>
         </table>
-    </form>
+    <!-- </form> -->
     </div>
 </body>

@@ -47,9 +47,9 @@ namespace Api.Controllers
         }
 
         [HttpPost("User/Login")]
-        public string LoginUser(DtoLogin dtoLogin)
+        public DtoToken LoginUser(DtoLogin dtoLogin)
         {
-            return _iBusinessLoginUser.LoginUser(dtoLogin);
+            return  new DtoToken(_iBusinessLoginUser.LoginUser(dtoLogin));
         }
 
         // client must have a role to use this http request
