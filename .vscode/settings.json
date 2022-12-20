@@ -5,6 +5,7 @@
         "claimtype",
         "firstname",
         "irepo",
-        "lastname"
+        "lastname",
+        "mytoken"
     ]
 }

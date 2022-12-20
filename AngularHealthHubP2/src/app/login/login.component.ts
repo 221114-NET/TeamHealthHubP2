@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { tap } from 'rxjs';
 import { LoginService } from '../login.service';
 
 @Component({
@@ -7,12 +8,19 @@ import { LoginService } from '../login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  // get the data from the email and password fields and send it to the server when the user clicks the login button
-  loginEmail: any = '';
+  loginEmail: string = "";
+  loginPassword: string = "";
+
   constructor(private login: LoginService) {}
-  LoginButton() 
+  
+  async LoginButton(loginEmail: string, loginPassword: string) 
   {
-    //this is getting the data from the server
-    this.login.getLogin().subscribe(data => {this.loginEmail = data.mytoken;});
+    this.login.getLogin(loginEmail, loginPassword).subscribe(data => 
+      {
+      sessionStorage.setItem("auth", data.mytoken)
+      //TODO ask about this since i am not async this.myString = data.mytoken 
+      });
   }
+
+
 }

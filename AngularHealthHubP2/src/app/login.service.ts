@@ -9,20 +9,15 @@ export class LoginService {
   constructor(private http: HttpClient) {
 
   }
-  private mytoken = '';
   private loginUrl = 'http://localhost:5122/api/Api/User/Login';  // URL to web api
-  // /** GET heroes from the server */
-  // getLogin2(): void {
-  //   // this.http.post<string>(this.loginUrl, {"email": "test","password": "test"});
-  // }
   
-  
-  getLogin(): Observable<Config>{
-    // now returns an Observable of string
-    return this.http.post<Config>(this.loginUrl, {"email": "test","password": "test"},);
+
+  getLogin(loginEmail: string, loginPassword: string): Observable<authToken>{
+    
+    return this.http.post<authToken>(this.loginUrl, {"email": `${loginEmail}`,"password": `${loginPassword}`},);
   }
   
 }
-export interface Config {
+export interface authToken {
   mytoken: string;
 }
