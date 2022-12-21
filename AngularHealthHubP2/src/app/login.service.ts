@@ -12,12 +12,12 @@ export class LoginService {
   private loginUrl = 'http://localhost:5122/api/Api/User/Login';  // URL to web api
   
 
-  getLogin(loginEmail: string, loginPassword: string): Observable<authToken>{
+  getLogin(loginEmail: string, loginPassword: string): Observable<AuthToken>{
     
-    return this.http.post<authToken>(this.loginUrl, {"email": `${loginEmail}`,"password": `${loginPassword}`},);
+    return this.http.post<AuthToken>(this.loginUrl, {"email": `${loginEmail}`,"password": `${loginPassword}`},);
   }
   
 }
-export interface authToken {
+export interface AuthToken {
   mytoken: string;
 }

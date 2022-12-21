@@ -7,11 +7,11 @@
         <table>
             <tr>
                 <td>Email:</td>
-                <td><input type ="email" [(ngModel)]="loginEmail" id="email"></td>
+                <td><input type ="email" (ngModel)="loginEmail" id="email"></td>
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><input type="password" [(ngModel)]="loginPassword" id="password"></td>
+                <td><input type="password" (ngModel)="loginPassword" id="password"></td>
             </tr>
             <tr>
                 <td><button (click) = "LoginButton(loginEmail, loginPassword)">Login</button></td>
