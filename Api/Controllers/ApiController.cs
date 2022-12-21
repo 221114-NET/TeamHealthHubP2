@@ -49,8 +49,6 @@ namespace Api.Controllers
         [HttpPost("User/Login")]
         public DtoToken LoginUser(DtoLogin dtoLogin)
         {
-            System.Console.WriteLine(dtoLogin.email);
-            System.Console.WriteLine(dtoLogin.password);
             return  new DtoToken(_iBusinessLoginUser.LoginUser(dtoLogin));
         }
 
