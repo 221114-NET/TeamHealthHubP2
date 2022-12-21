@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { tap } from 'rxjs';
 import { AuthToken, LoginService } from '../login.service';
 
 @Component({
@@ -19,13 +18,21 @@ export class LoginComponent {
     
     // const resp = await this.login.getLogin(loginEmail, loginPassword).toPromise();
     //   sessionStorage.setItem("auth", resp.mytoken)
+    console.log(loginEmail);
+    console.log(loginPassword);
+    let LoginOutput: string = "";
+
+    LoginOutput = (await this.login.getLogin(loginEmail, loginPassword)).mytoken;
+
+    sessionStorage.setItem("auth", LoginOutput);
     
-    this.login.getLogin(loginEmail, loginPassword).subscribe(data => 
-      {
-      sessionStorage.setItem("auth", data.mytoken)
-      //TODO ask about this since i am not async this.myString = data.mytoken
-      //TODO check if the retun value is user not found if it is display that else save it in sessionStorage
-      });
+
+    // .subscribe(data => 
+    //   {
+    //   sessionStorage.setItem("auth", data.mytoken)
+    //   //TODO ask about this since i am not async this.myString = data.mytoken
+    //   //TODO check if the retun value is user not found if it is display that else save it in sessionStorage
+    //   });
 
   }
 
